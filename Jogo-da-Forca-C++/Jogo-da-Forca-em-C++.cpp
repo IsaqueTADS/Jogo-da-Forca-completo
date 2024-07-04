@@ -110,12 +110,12 @@ void facil (){
 
             forca[i] = '_';
             p_usada[i] = '-';
-            /*Aqui os dois vetores s[ao prenchidos até o tamanho 60, porém ao decorrer do código
+            /*Aqui os dois vetores são prenchidos até o tamanho 60, porém ao decorrer do código
             apenas o tamanho da palavra secreta será exibida */
 
          }
          
-         while((vidas > 0) && (acertos < tamanho))
+         while((vidas > 0) && (acertos < tamanho)) //loop principal onde roda o jogo.
          {
            if(cdica = 5 == errou) {
 
