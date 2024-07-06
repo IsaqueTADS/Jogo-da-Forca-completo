@@ -3,12 +3,12 @@
 #include <stdbool.h> //biblioteca para o uso do system("cls")
 #include <cstdlib> //bliblioteca para o uso do exit();
 #include <cwchar> //biblioteca para aceitar caracter multibyte no C++
-#include <ctime>
+#include <ctime>  //biblioteca para o uso do clock(), CLOCKS_PER_SEC;;
 
 using namespace std;
 
    wchar_t palavra[60], chute[1], forca[60], p_usada[60], dica[60];
-   int opc, difi, i, i1, tamanho, dtamanho, vidas, acertos,errou,cdica;
+   int opc, difi, i, i1, tamanho, dtamanho, vidas, acertos,errou,cdica,tempoMax;
    bool acerto;
     
    void inicio ();
@@ -18,7 +18,8 @@ using namespace std;
    void perdeu();
    void CaracterMultiByte();
    bool chuteRepetido(wchar_t caracter);
-   void checkTime(clock_t tempo_inicial);
+   void checkTime(clock_t tempo_inicial, int tempoMax);
+   void tempoEsgotado();
   
  
 
@@ -86,6 +87,7 @@ void dificuldade(){
 
 void facil (){
    
+    setlocale(LC_ALL,"portuguese");
 
         system("cls");
 
@@ -97,6 +99,7 @@ void facil (){
          vidas = 10;
          errou = 0;
          cdica = 5;
+         tempoMax = 360; 
 
          wcout << "Qual a palavra que o jogador vai adivinhar? "<<endl;
          wcin>>palavra;
@@ -124,10 +127,11 @@ void facil (){
 
          }
 
-         clock_t tempo_inicial = clock();
+         clock_t tempo_inicial = clock(); // nessa parte do jogo estamos colocando no tempo inicial a informação do tempo em que o jogo começou a executar.
+
          while((vidas > 0) && (acertos < tamanho)) //loop principal onde roda o jogo.
          {
-            checkTime( tempo_inicial);
+            checkTime( tempo_inicial, tempoMax); //manda info do tempo inicial, e o tempo max determinado no inicio da função.
             
            if(cdica >= vidas) {
 
@@ -139,7 +143,7 @@ void facil (){
 
             wcout<<"A palavra tem-"<<tamanho<<"-caracter"<<endl;
 
-            wcout<<"Palavras usadas: ";
+            wcout<<"letras usadas: ";
 
         for( i = 0; i < 60; i ++){
             if(p_usada[i] != '-'){
@@ -247,20 +251,24 @@ bool chuteRepetido(wchar_t caracter){ // recebe informação do chute do jogo.
 
 }
 
-void checkTime( clock_t tempo_inicial){
-    clock_t tempo_atual = clock();
-    double tempo_decorrido = double(tempo_atual - tempo_inicial) / CLOCKS_PER_SEC;
-    double tempo_restante = 30 - tempo_decorrido;
+void checkTime( clock_t tempo_inicial, int tempoMax){
+    clock_t tempo_atual = clock(); //pega o tempo atual desde a execução do jogo.
+    double tempo_decorrido = double(tempo_atual - tempo_inicial) / CLOCKS_PER_SEC; // gera o tempo decorrido, com tempo atual menos o inicial dividindo por quantidade de clocks por segundos.
+    double tempo_restante = tempoMax - tempo_decorrido; //calcula o tempo restante, baseado no tempo maximo determinado menos o decorrido, ai da para saber quanto resta.
 
-    int minutos = int( tempo_restante) / 60;
+    int minutos = int( tempo_restante) / 60;  //sabendo quanto resta da para calcular minutos e segundos.
     int segundos = int (tempo_restante) % 60;
 
-    wcout<<"Tempo restante: "<<minutos<<":"<<segundos<<endl;
+    wcout<<"Tempo restante: "<<minutos<<":"<<segundos<<endl; //mostra na tela o time.
 
-    if ( tempo_decorrido >= 30){
+    if ( tempo_decorrido >= tempoMax){ //bloco que verifica se o tempo já excedeu o tempo maximo, caso sim ele vai levar o jogo para uma função que vai terinar o jogo.
         cout<<"deu certo"<<endl;
         exit(0);
     }
+}
+
+void tempoEsgotado(){
+    
 }
 
 void ganhou (){
