@@ -24,8 +24,8 @@ using namespace std;
  
 
 int main(){
-     void CaracterMultiByte();
-    
+    CaracterMultiByte();
+    tempoEsgotado ();
     inicio();
     dificuldade();
    
@@ -87,7 +87,7 @@ void dificuldade(){
 
 void facil (){
    
-    setlocale(LC_ALL,"portuguese");
+    void CaracterMultibyte ();
 
         system("cls");
 
@@ -145,12 +145,12 @@ void facil (){
 
             wcout<<"letras usadas: ";
 
-        for( i = 0; i < 60; i ++){
+         for( i = 0; i < 60; i ++){
             if(p_usada[i] != '-'){
                 wcout<<p_usada[i]<<"-";
             }
             //Esse bloco mostra na tela as palavras que o jogador utilizou.
-        }
+         }
 
      
             wcout<<"\n";
@@ -268,6 +268,29 @@ void checkTime( clock_t tempo_inicial, int tempoMax){
 }
 
 void tempoEsgotado(){
+
+    
+
+
+
+    cout << "  _____          __  __ ______      \n";
+    cout << " / ____|   /\\   |  \\/  |  ____|  \n";
+    cout << "| |  __   /  \\  | \\  / | |__   \n";
+    cout << "| | |_ | / /\\ \\ | |\\/| |  __|    \n";
+    cout << "| |__| |/ ____ \\| |  | | |____   \n";
+    cout << " \\_____/_/    \\_\\_|  |_|______| \n";
+
+    cout << "  _____      ________ _____  \n";
+    cout << " / __ \\ \\    / /  ____|  __ \\ \n";
+    cout << "| |  | \\ \\  / /| |__  | |__) | \n";
+    cout << "| |  | |\\ \\/ / |  __| |  _  /  \n";
+    cout << "|_|  | | \\  /  |  |___| \\ \\  \n";
+    cout << " \\____/   \\/   |______|_|  \\_\\ \n";
+
+
+
+
+
     
 }
 
