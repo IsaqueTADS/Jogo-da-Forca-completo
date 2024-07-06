@@ -3,6 +3,7 @@
 #include <stdbool.h> //biblioteca para o uso do system("cls")
 #include <cstdlib> //bliblioteca para o uso do exit();
 #include <cwchar> //biblioteca para aceitar caracter multibyte no C++
+#include <ctime>
 
 using namespace std;
 
@@ -17,6 +18,8 @@ using namespace std;
    void perdeu();
    void CaracterMultiByte();
    bool chuteRepetido(wchar_t caracter);
+   void checkTime(clock_t tempo_inicial);
+  
  
 
 int main(){
@@ -93,6 +96,7 @@ void facil (){
          acerto = false;
          vidas = 10;
          errou = 0;
+         cdica = 5;
 
          wcout << "Qual a palavra que o jogador vai adivinhar? "<<endl;
          wcin>>palavra;
@@ -119,10 +123,13 @@ void facil (){
             apenas o tamanho da palavra secreta será exibida */
 
          }
-         
+
+         clock_t tempo_inicial = clock();
          while((vidas > 0) && (acertos < tamanho)) //loop principal onde roda o jogo.
          {
-           if(cdica = 5 >= vidas) {
+            checkTime( tempo_inicial);
+            
+           if(cdica >= vidas) {
 
                 wcout<<"Dica: "<<dica<<endl;
 
@@ -238,6 +245,22 @@ bool chuteRepetido(wchar_t caracter){ // recebe informação do chute do jogo.
     return false; //chute valido.
 
 
+}
+
+void checkTime( clock_t tempo_inicial){
+    clock_t tempo_atual = clock();
+    double tempo_decorrido = double(tempo_atual - tempo_inicial) / CLOCKS_PER_SEC;
+    double tempo_restante = 30 - tempo_decorrido;
+
+    int minutos = int( tempo_restante) / 60;
+    int segundos = int (tempo_restante) % 60;
+
+    wcout<<"Tempo restante: "<<minutos<<":"<<segundos<<endl;
+
+    if ( tempo_decorrido >= 30){
+        cout<<"deu certo"<<endl;
+        exit(0);
+    }
 }
 
 void ganhou (){
