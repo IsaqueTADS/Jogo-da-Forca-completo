@@ -2,10 +2,11 @@
 #include <locale.h>
 #include <stdbool.h> //biblioteca para o uso do system("cls")
 #include <cstdlib> //bliblioteca para o uso do exit();
+#include <cwchar> //biblioteca para aceitar caracter multibyte no C++
 
 using namespace std;
 
-   char palavra[60], chute[1], forca[60], p_usada[60], dica[60];
+   wchar_t palavra[60], chute[1], forca[60], p_usada[60], dica[60];
    int opc, difi, i, i1, tamanho, dtamanho, vidas, acertos,errou,cdica;
    bool acerto;
     
@@ -14,19 +15,16 @@ using namespace std;
    void facil();
    void ganhou();
    void perdeu();
-   bool chuteRepetido(char caracter);
+   void CaracterMultiByte();
+   bool chuteRepetido(wchar_t caracter);
  
 
 int main(){
-
-    setlocale(LC_ALL,"portuguese_Brazil");
-
+     void CaracterMultiByte();
     
     inicio();
     dificuldade();
    
-
-
     return 0;
 }
 
@@ -34,33 +32,41 @@ int main(){
 
 void inicio(){
 
-    cout<<"JOGO DA FORCA V2.0 "<<endl;
-    cout<<"===================="<<endl;
-    cout<<"Criador: IsaqueTADS"<<endl;
-    cout<<"Isaque Rodrigues Alves\n "<<endl;
+    wcout<<"JOGO DA FORCA V2.0 "<<endl;
+    wcout<<"===================="<<endl;
+    wcout<<"Criador: IsaqueTADS"<<endl;
+    wcout<<"Isaque Rodrigues Alves\n "<<endl;
 
-    cout<<"Instragam:\n@isaquetads \n@isaque_rodriguesdev\n\n "<<endl;
+    wcout<<"Instragam:\n@isaquetads \n@isaque_rodriguesdev\n\n "<<endl;
     system("pause");
     system("cls");
 
 
 }
 
+void CaracterMultiByte(){
+
+    setlocale(LC_ALL,"portuguese.1252");
+    
+}
+
+
 void dificuldade(){
-    system("cls");
 
-    cout<<"DIFICULDADE DO JOGO !\n "<<endl;
+      system("cls");
 
-    cout<<"[1] Facil  [3] Dificil"<<endl;
-    cout<<"[2] Normal [ ] INSANOO"<<endl;
-    cout<<"[5] Sair "<<endl;
-    cout<<"Escolha uma das opções acima: "<<endl;
-    cin>>difi;
+    wcout<<"DIFICULDADE DO JOGO !\n "<<endl;
+
+    wcout<<"[1] Facil  [3] Dificil"<<endl;
+    wcout<<"[2] Normal [ ] INSANOO"<<endl;
+    wcout<<"[5] Sair "<<endl;
+    wcout<<"Escolha uma das opções acima: "<<endl;
+    wcin>>difi;
 
     while(difi == 5){
         system("cls");
 
-        cout<<"DESISTIU NÉ ;-; ;-; ;-; "<<endl;
+        wcout<<"DESISTIU NÉ ;-; ;-; ;-; "<<endl;
 
         exit(0);
     }
@@ -77,7 +83,6 @@ void dificuldade(){
 
 void facil (){
    
-    setlocale(LC_ALL,"portuguese_Brazil");
 
         system("cls");
 
@@ -89,11 +94,11 @@ void facil (){
          vidas = 10;
          errou = 0;
 
-         cout << "Qual a palavra que o jogador vai adivinhar? "<<endl;
-         cin>>palavra;
+         wcout << "Qual a palavra que o jogador vai adivinhar? "<<endl;
+         wcin>>palavra;
          system("cls");
-         cout << "A palavra que você escolheu é?  Ex:(cidade, animal, frute, etc...) "<<endl;
-         cin>>dica;
+         wcout << "A palavra que você escolheu é?  Ex:(cidade, animal, frute, etc...) "<<endl;
+         wcin>>dica;
          system("cls");
 
          while(palavra[i] != '\0' )
@@ -117,54 +122,54 @@ void facil (){
          
          while((vidas > 0) && (acertos < tamanho)) //loop principal onde roda o jogo.
          {
-           if(cdica = 5 == errou) {
+           if(cdica = 5 >= vidas) {
 
-                cout<<"Dica: "<<dica<<endl;
+                wcout<<"Dica: "<<dica<<endl;
 
             }
            
-            cout<<"Vidas restante: "<<vidas<<endl;
+            wcout<<"Vidas restante: "<<vidas<<endl;
 
-            cout<<"A palavra tem-"<<tamanho<<"-caracter"<<endl;
+            wcout<<"A palavra tem-"<<tamanho<<"-caracter"<<endl;
 
-            cout<<"Palavras usadas: ";
+            wcout<<"Palavras usadas: ";
 
         for( i = 0; i < 60; i ++){
             if(p_usada[i] != '-'){
-                cout<<p_usada[i]<<"-";
+                wcout<<p_usada[i]<<"-";
             }
             //Esse bloco mostra na tela as palavras que o jogador utilizou.
         }
 
      
-            cout<<"\n";
+            wcout<<"\n";
 
-            cout << "  _______       \n";
-            cout << " |/      |      \n";
-            cout << " |      " << (errou >= 1 ? '(' : ' ') << (errou >= 2 ? '_' : ' ') << (errou >= 3 ? ')' : ' ') << "  \n";
-            cout << " |      " << (errou >= 4 ? '\\' : ' ') << (errou >= 5 ? '|' : ' ') << (errou >= 6 ? '/' : ' ') << "  \n";
-            cout << " |       " << (errou >= 7 ? '|' : ' ') << "     \n";
-            cout << " |      " << (errou >= 8 ? '/' : ' ') << " " << (errou >= 9 ? '\\' : ' ') << "   \n";
-            cout << " |              \n";
-            cout << "_|___  ";
+            wcout << "  _______       \n";
+            wcout << " |/      |      \n";
+            wcout << " |      " << (errou >= 1 ? '(' : ' ') << (errou >= 2 ? '_' : ' ') << (errou >= 3 ? ')' : ' ') << "  \n";
+            wcout << " |      " << (errou >= 4 ? '\\' : ' ') << (errou >= 5 ? '|' : ' ') << (errou >= 6 ? '/' : ' ') << "  \n";
+            wcout << " |       " << (errou >= 7 ? '|' : ' ') << "     \n";
+            wcout << " |      " << (errou >= 8 ? '/' : ' ') << " " << (errou >= 9 ? '\\' : ' ') << "   \n";
+            wcout << " |              \n";
+            wcout << "_|___  ";
             for(i = 0; i < tamanho; i ++)
             {
                 
-            cout<<forca[i];
+            wcout<<forca[i];
 
             } // esse for exibe os chutes se for certo.
 
             
 
-            cout<<"\n"<<endl;
-            cout<<"Chute uma letra: "<<endl;
-            cin>>chute;
+            wcout<<"\n"<<endl;
+            wcout<<"Chute uma letra: "<<endl;
+            wcin>>chute;
             
             system("cls");
 
             if (chuteRepetido(chute[0])){ //recebe uma resposta booleana da função chuteRepetido(), true a palavra é repetida, false é valida.
 
-                cout<<"Palavra repetida!!\nPerdeu uma vida para ficar esperto <3\n "<<endl;
+                wcout<<"Palavra repetida!!\nPerdeu uma vida para ficar esperto <3\n "<<endl;
                 vidas --;
                 errou ++;
 
@@ -219,15 +224,16 @@ void facil (){
 
 }
 
-bool chuteRepetido(char caracter){ // recebe informação do chute do jogo.
-    for( i = 0; i <60; i ++) {
+bool chuteRepetido(wchar_t caracter){ // recebe informação do chute do jogo.
 
-        if ( p_usada[i] == caracter){
+        for( i = 0; i <60; i ++) {
+
+            if ( p_usada[i] == caracter){
+                
+                return true;//chute repetido.
+            }
             
-            return true;//chute repetido.
         }
-        
-    }
 
     return false; //chute valido.
 
@@ -235,25 +241,24 @@ bool chuteRepetido(char caracter){ // recebe informação do chute do jogo.
 }
 
 void ganhou (){
+    
+    setlocale(LC_ALL,"portuguese");
+         wcout<<"Parabens você acertou!! "<<endl;
+         wcout<<"       ___________      \n";
+         wcout<<"      '._==_==_=_.'     \n";
+         wcout<<"      .-\\:      /-.    \n";
+         wcout<<"     | |:.     | |    \n";
+         wcout<<"      '-|:.     |-'     \n";
+         wcout<<"        \\::.    /      \n";
+         wcout<<"         '::. .'        \n";
+         wcout<<"                      \n";
+         wcout<<"         _.' '._        \n";
+         wcout<<"        '-------'       \n\n";
 
-    setlocale(LC_ALL,"portuguese_Brazil");
-
-         cout<<"Parabens você acertou!! "<<endl;
-         cout<<"       ___________      \n";
-         cout<<"      '._==_==_=_.'     \n";
-         cout<<"      .-\\:      /-.    \n";
-         cout<<"     | |:.     | |    \n";
-         cout<<"      '-|:.     |-'     \n";
-         cout<<"        \\::.    /      \n";
-         cout<<"         '::. .'        \n";
-         cout<<"                      \n";
-         cout<<"         _.' '._        \n";
-         cout<<"        '-------'       \n\n";
-
-         cout<<"Jogar novamente? "<<endl;
-         cout<<"[1] jogar novamnete "<<endl;
-         cout<<"[2] Sair "<<endl;        
-         cin>>opc;
+         wcout<<"Jogar novamente? "<<endl;
+         wcout<<"[1] jogar novamnete "<<endl;
+         wcout<<"[2] Sair "<<endl;        
+         wcin>>opc;
 
              if (opc == 1)
             {
@@ -263,7 +268,7 @@ void ganhou (){
             }else if( opc == 2) 
             {
                 system("cls");
-                cout<<"Obrigado por jogar meu jogo v3 "<<endl;
+                wcout<<"Obrigado por jogar meu jogo v3 "<<endl;
 
                 exit(0); //indica que o progama se encerrou, biblioteca cstdlib
                     
@@ -273,33 +278,33 @@ void ganhou (){
 
 void perdeu (){
 
-    setlocale(LC_ALL,"portuguese_Brazil");
+    setlocale(LC_ALL,"portuguese");
 
-        cout<<"Poxa você perdeu e foi enfocardo ;-;-; ";
-        cout<<"A palavra era: "<<palavra<<endl;
+        wcout<<"Poxa você perdeu e foi enfocardo ;-;-; ";
+        wcout<<"A palavra era: "<<palavra<<endl;
             
-        cout<<"    _______________         \n";
-        cout<<"   /               \\       \n"; 
-        cout<<"  /                 \\      \n";
-        cout<<"//                   \\/\\  \n";
-        cout<<"\\|   XXXX     XXXX   | /   \n";
-        cout<<" |   XXXX     XXXX   |/     \n";
-        cout<<" |   XXX       XXX   |      \n";
-        cout<<" |                   |      \n";
-        cout<<" \\__      XXX      __/     \n";
-        cout<<"   |\\     XXX     /|       \n";
-        cout<<"   | |           | |        \n";
-        cout<<"   | I I I I I I I |        \n";
-        cout<<"   |  I I I I I I  |        \n";
-        cout<<"   \\_             _/       \n";
-        cout<<"     \\_         _/         \n";
-        cout<<"       \\_______/           \n\n";
+        wcout<<"    _______________         \n";
+        wcout<<"   /               \\       \n"; 
+        wcout<<"  /                 \\      \n";
+        wcout<<"//                   \\/\\  \n";
+        wcout<<"\\|   XXXX     XXXX   | /   \n";
+        wcout<<" |   XXXX     XXXX   |/     \n";
+        wcout<<" |   XXX       XXX   |      \n";
+        wcout<<" |                   |      \n";
+        wcout<<" \\__      XXX      __/     \n";
+        wcout<<"   |\\     XXX     /|       \n";
+        wcout<<"   | |           | |        \n";
+        wcout<<"   | I I I I I I I |        \n";
+        wcout<<"   |  I I I I I I  |        \n";
+        wcout<<"   \\_             _/       \n";
+        wcout<<"     \\_         _/         \n";
+        wcout<<"       \\_______/           \n\n";
 
 
-        cout<<"Jogar novamente? "<<endl;
-        cout<<"[1] jogar novamente "<<endl;
-        cout<<"[2] Sair "<<endl;
-        cin>>opc;
+        wcout<<"Jogar novamente? "<<endl;
+        wcout<<"[1] jogar novamente "<<endl;
+        wcout<<"[2] Sair "<<endl;
+        wcin>>opc;
 
          if (opc == 1)
          {
@@ -309,7 +314,7 @@ void perdeu (){
          }else{
                    
            system("cls");
-           cout<<"Obrigado por jogar meu jogo v3 "<<endl;
+           wcout<<"Obrigado por jogar meu jogo v3 "<<endl;
 
            exit(0); //indica que o progama se encerrou, biblioteca cstdlib
 
