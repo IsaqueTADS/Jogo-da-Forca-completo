@@ -9,19 +9,22 @@
 
 using namespace std;
 
-   wchar_t palavra[60], chute[1], forca[60], p_usada[60], dica[60];
+   wchar_t palavra[60], chute[1], forca[60], p_usada[60], dica[60], trollin[60];
    int opc, difi, i, i1, tamanho, dtamanho, vidas, acertos,errou,cdica,tempoMax,intime;
    bool acerto;
     
    void inicio ();
    void dificuldade ();
-   void facil();
+   void modfacil();
+   void modNormal();
+   void modDificil();
+   void modInsano();
    void ganhou();
    void perdeu();
-   void CaracterMultiByte();
    bool chuteRepetido(wchar_t caracter);
    void checkTime(clock_t tempo_inicial, int tempoMax);
    void tempoEsgotado();
+   
  
 
 int main(){
@@ -52,87 +55,121 @@ void inicio(){
 }
 
 void dificuldade(){
+
     setlocale(LC_ALL,"portuguese");
       system("cls");
-
+        
         wcout<<"DIFICULDADE DO JOGO !\n "<<endl;
 
         wcout<<"[1] Facil  [3] Dificil"<<endl;
-        wcout<<"[2] Normal [ ] INSANOO"<<endl;
+        wcout<<"[2] Normal [4] INSANOO"<<endl;
         wcout<<"[5] Sair "<<endl;
         wcout<<"Escolha uma das opções acima: "<<endl;
-        wcin>>difi;
+        do{ wcin>>difi;
 
-        while(difi == 5){
+        system("cls");
+
+        wcout<<"[ERRO] DIGITO INVÁLIDO !\nDigite novamente!\n "<<endl;
+
+        wcout<<"[1] Facil  [3] Dificil"<<endl;
+        wcout<<"[2] Normal [4] INSANOO"<<endl;
+        wcout<<"[5] Sair "<<endl;
+        wcout<<"Escolha uma das opções acima: "<<endl;
+        
+        
+        }while(difi != 1 && difi != 2 && difi !=3 && difi != 4 && difi != 5);
+
+        switch(difi){
+
+            case 1:
+
+            modfacil();
+
+            case 2:
+
+            modNormal();
+
+            case 3:
+
+            modDificil();
+
+            case 4:
+            
+            modInsano();
+            
+            case 5:
+
             system("cls");
 
             wcout<<"DESISTIU NÉ ;-; ;-; ;-; "<<endl;
 
             exit(0);
-        }
-        
-        switch(difi){
 
-            case 1:
-
-            facil();
-            
         }
+
 
 }
 
-void facil (){
+void modfacil (){
    
-    setlocale(LC_ALL,"portuguese.1252");
+    system("cls");
+    
+        i = 0;
+        i1 = 1;
+        tamanho = 0;
+        acertos = 0;
+        acerto = false;
+        vidas = 10;
+        errou = 0;
+        cdica = 5;
+        tempoMax = 180; 
+        intime = 5;
 
-        system("cls");
-         
-         i = 0;
-         i1 = 1;
-         tamanho = 0;
-         acertos = 0;
-         acerto = false;
-         vidas = 10;
-         errou = 0;
-         cdica = 5;
-         tempoMax = 180; 
-         intime = 5;
+        locale old_locale(locale::classic()); //salva o estado local
 
-         locale old_locale(locale::classic()); //salva o estado local
-         setlocale(LC_ALL,"portuguese");
-         wcout << "Qual a palavra que o jogador vai adivinhar? "<<endl;
-         locale::global(old_locale);//volta para linguagem de escopo global.
-         wcin>>palavra;
-         system("cls");
-         setlocale(LC_ALL,"portuguese");
-         wcout << "A palavra que você escolheu é?  Ex:(cidade, animal, fruta, etc...) "<<endl;
-         locale::global(old_locale);
-         wcin>>dica;
-         system("cls");
+            setlocale(LC_ALL,"portuguese");
+
+                wcout << "Qual a palavra que o jogador vai adivinhar? "<<endl;
+
+            locale::global(old_locale);//volta para linguagem de escopo global.
+
+                wcin>>palavra;
+                system("cls");
+
+            setlocale(LC_ALL,"portuguese");
+
+                wcout << "A palavra que você escolheu é?  Ex:(cidade, animal, fruta, etc...) "<<endl;
+
+            locale::global(old_locale);
+                wcin>>dica;
+                system("cls");
             
-         while(palavra[i] != '\0' )
-         {
+        while(palavra[i] != '\0' )
+        {
 
             i ++;
             tamanho ++;
             /*esse bloco verifica o tamanho da palavra, o \0 indica o fim da palavra, enquando n chegar nele da lopp
             e incrementa o tamanho*/
-         }
+        }
 
-         for(i = 0; i < 60; i++)
-         {
+        for(i = 0; i < 60; i++)
+        {
 
             forca[i] = '_';
             p_usada[i] = '-';
             /*Aqui os dois vetores são prenchidos até o tamanho 60, porém ao decorrer do código
             apenas o tamanho da palavra secreta será exibida */
 
-         }
-         setlocale(LC_ALL,"portuguese");
-         wcout<<"Você terá: "<<tempoMax / 60 << "m"<<endl;
-         wcout<<"O jogo começa em: "<<endl;
-         locale::global(old_locale); //volta para linguagem de escopo global
-         while( intime > 0 ){
+        }
+        setlocale(LC_ALL,"portuguese");
+
+            wcout<<"Você tem: "<<tempoMax / 60 << "m "<<tempoMax % 60<<"s "<<"para adivinhar a palavra"<<endl;
+            wcout<<"O jogo começa em: "<<endl;
+
+        locale::global(old_locale); //volta para linguagem de escopo globa
+        
+        while( intime > 0 ){
 
             wcout << intime << "\r" << flush;
 
@@ -140,16 +177,14 @@ void facil (){
 
             intime --;
 
+        }
+        
+        system("cls");
 
+        clock_t tempo_inicial = clock(); // nessa parte do jogo estamos colocando no tempo inicial a informação do tempo em que o jogo começou a executar.
 
-         }
-         
-         system("cls");
-
-         clock_t tempo_inicial = clock(); // nessa parte do jogo estamos colocando no tempo inicial a informação do tempo em que o jogo começou a executar.
-
-         while((vidas > 0) && (acertos < tamanho)) //loop principal onde roda o jogo.
-         {  setlocale(LC_ALL,"portuguese.1252");
+        while((vidas > 0) && (acertos < tamanho)) //loop principal onde roda o jogo.
+        {  setlocale(LC_ALL,"portuguese.1252");
             checkTime( tempo_inicial, tempoMax); //manda info do tempo inicial, e o tempo max determinado no inicio da função.
             
                 if(cdica >= vidas) {
@@ -240,13 +275,13 @@ void facil (){
 
             if(acertos == tamanho){
 
-                    ganhou();
+                ganhou();
             
             }else
             {
 
                 
-                    perdeu();
+                perdeu();
             }   
 
 
@@ -254,12 +289,535 @@ void facil (){
 
 }
 
-void exibirForca(){
-    setlocale(LC_ALL,"portuguese.1252");
-    
+void modNormal(){
 
+   system("cls");
     
+        i = 0;
+        i1 = 1;
+        tamanho = 0;
+        acertos = 0;
+        acerto = false;
+        vidas = 6;
+        errou = 0;
+        cdica = 3;
+        tempoMax = 120; 
+        intime = 5;
+
+        locale old_locale(locale::classic()); //salva o estado local
+
+            setlocale(LC_ALL,"portuguese");
+
+                wcout << "Qual a palavra que o jogador vai adivinhar? "<<endl;
+
+            locale::global(old_locale);//volta para linguagem de escopo global.
+
+                wcin>>palavra;
+                system("cls");
+
+            setlocale(LC_ALL,"portuguese");
+
+                wcout << "A palavra que você escolheu é?  Ex:(cidade, animal, fruta, etc...) "<<endl;
+
+            locale::global(old_locale);
+                wcin>>dica;
+                system("cls");
+            
+        while(palavra[i] != '\0' )
+        {
+
+            i ++;
+            tamanho ++;
+            /*esse bloco verifica o tamanho da palavra, o \0 indica o fim da palavra, enquando n chegar nele da lopp
+            e incrementa o tamanho*/
+        }
+
+        for(i = 0; i < 60; i++)
+        {
+
+            forca[i] = '_';
+            p_usada[i] = '-';
+            /*Aqui os dois vetores são prenchidos até o tamanho 60, porém ao decorrer do código
+            apenas o tamanho da palavra secreta será exibida */
+
+        }
+        setlocale(LC_ALL,"portuguese");
+
+            wcout<<"Você tem: "<<tempoMax / 60 << "m "<<tempoMax % 60<<"s "<<"para adivinhar a palavra"<<endl;
+            wcout<<"O jogo começa em: "<<endl;
+
+        locale::global(old_locale); //volta para linguagem de escopo globa
+        
+        while( intime > 0 ){
+
+            wcout << intime << "\r" << flush;
+
+            sleep(1);
+
+            intime --;
+
+        }
+        
+        system("cls");
+
+        clock_t tempo_inicial = clock(); // nessa parte do jogo estamos colocando no tempo inicial a informação do tempo em que o jogo começou a executar.
+
+        while((vidas > 0) && (acertos < tamanho)) //loop principal onde roda o jogo.
+        {  setlocale(LC_ALL,"portuguese.1252");
+            checkTime( tempo_inicial, tempoMax); //manda info do tempo inicial, e o tempo max determinado no inicio da função.
+            
+                if(cdica >= vidas) {
+
+                        wcout<<"Dica: "<<dica<<endl;
+
+                    }
+                
+                    wcout<<"Vidas restante: "<<vidas<<endl;
+
+                    wcout<<"A palavra tem-"<<tamanho<<"-caracter"<<endl;
+
+                    wcout<<"letras usadas: ";
+
+                for( i = 0; i < 60; i ++){
+                    if(p_usada[i] != '-'){
+                        wcout<<p_usada[i]<<"-";
+                    }
+                    //Esse bloco mostra na tela as palavras que o jogador utilizou.
+                }
+
+            
+                    wcout<<"\n";
+
+                    wcout << "  _______       \n";
+                    wcout << " |/      |      \n";
+                    wcout << " |      " << (errou >= 1 ? '(' : ' ') << (errou >= 1 ? '_' : ' ') << (errou >= 1 ? ')' : ' ') << "  \n";
+                    wcout << " |      " << (errou >= 2 ? '\\' : ' ') << (errou >= 2 ? '|' : ' ') << (errou >= 2 ? '/' : ' ') << "  \n";
+                    wcout << " |       " << (errou >= 3 ? '|' : ' ') << "     \n";
+                    wcout << " |      " << (errou >= 4 ? '/' : ' ') << " " << (errou >= 5 ? '\\' : ' ') << "   \n";
+                    wcout << " |              \n";
+                    wcout << "_|___  ";
+                    for(i = 0; i < tamanho; i ++)
+                    {
+                        
+                    wcout<<forca[i];
+
+                    } // esse for exibe os chutes se for certo.
+
+                    
+
+                    wcout<<"\n"<<endl;
+                    wcout<<"Chute uma letra: "<<endl;
+                    wcin>>chute;
+            
+            system("cls");
+
+                if (chuteRepetido(chute[0])){ //recebe uma resposta booleana da função chuteRepetido(), true a palavra é repetida, false é valida.
+
+                    wcout<<"Palavra repetida!!\nPerdeu uma vida para ficar esperto <3\n "<<endl;
+                    vidas --;
+                    errou ++;
+
+                }else { 
+
+                    p_usada[i1 ++] = chute[0]; // atribui para o vetor usadas todos caracter do vetor chute na posição 0.
+
+                    for(i = 0; i < tamanho; i ++)
+                    {
+
+                        if (palavra[i] == chute[0]){
+                            acerto = true;
+                            forca[i] = palavra[i];
+                            acertos ++;
+
+                        }
+                        //esse for verifica se a letra está na palavra secreta, e se estive coloca a letra no lugar certo.
+
+                    }
+                    
+
+                    if(!acerto){
+
+                        vidas --;
+                        errou ++;
+                        //esse bloco serve para contabilizara as vidas, caso a pessoa erre vai diminuir a vida.
+                        //serve tambem para incrementar o vlaor da variavel errou, assim podendo formar a forca.
+                    }
+
+                    acerto = false;
+                    system("cls");
+        
+                }
+
+            
+
+            }
+
+            if(acertos == tamanho){
+
+                ganhou();
+            
+            }else
+            {
+
+                
+                perdeu();
+            }   
+
 }
+
+void modDificil(){
+     system("cls");
+    
+        i = 0;
+        i1 = 1;
+        tamanho = 0;
+        acertos = 0;
+        acerto = false;
+        vidas = 6;
+        errou = 0;
+        cdica = 5;
+        tempoMax = 90; 
+        intime = 5;
+
+        locale old_locale(locale::classic()); //salva o estado local
+
+            setlocale(LC_ALL,"portuguese");
+
+                wcout << "Qual a palavra que o jogador vai adivinhar? "<<endl;
+
+            locale::global(old_locale);//volta para linguagem de escopo global.
+
+                wcin>>palavra;
+                system("cls");
+
+            setlocale(LC_ALL,"portuguese");
+
+                wcout << "A palavra que você escolheu é?  Ex:(cidade, animal, fruta, etc...) "<<endl;
+
+            locale::global(old_locale);
+                wcin>>dica;
+                system("cls");
+            
+        while(palavra[i] != '\0' )
+        {
+
+            i ++;
+            tamanho ++;
+            /*esse bloco verifica o tamanho da palavra, o \0 indica o fim da palavra, enquando n chegar nele da lopp
+            e incrementa o tamanho*/
+        }
+
+        for(i = 0; i < 60; i++)
+        {
+
+            forca[i] = '_';
+            p_usada[i] = '-';
+            /*Aqui os dois vetores são prenchidos até o tamanho 60, porém ao decorrer do código
+            apenas o tamanho da palavra secreta será exibida */
+
+        }
+        setlocale(LC_ALL,"portuguese");
+
+            wcout<<"Você tem: "<<tempoMax / 60 << "m "<<tempoMax % 60<<"s "<<"para adivinhar a palavra"<<endl;
+            wcout<<"O jogo começa em: "<<endl;
+
+        locale::global(old_locale); //volta para linguagem de escopo globa
+        
+        while( intime > 0 ){
+
+            wcout << intime << "\r" << flush;
+
+            sleep(1);
+
+            intime --;
+
+        }
+        
+        system("cls");
+
+        clock_t tempo_inicial = clock(); // nessa parte do jogo estamos colocando no tempo inicial a informação do tempo em que o jogo começou a executar.
+
+        while((vidas > 0) && (acertos < tamanho)) //loop principal onde roda o jogo.
+        {  setlocale(LC_ALL,"portuguese.1252");
+            checkTime( tempo_inicial, tempoMax); //manda info do tempo inicial, e o tempo max determinado no inicio da função.
+            
+                if(cdica >= vidas) {
+
+                        wcout<<"Dica: "<<dica<<endl;
+
+                    }
+                
+                    wcout<<"Vidas restante: "<<vidas<<endl;
+
+                    wcout<<"A palavra tem-"<<tamanho<<"-caracter"<<endl;
+
+                    wcout<<"letras usadas: ";
+
+                for( i = 0; i < 60; i ++){
+                    if(p_usada[i] != '-'){
+                        wcout<<p_usada[i]<<"-";
+                    }
+                    //Esse bloco mostra na tela as palavras que o jogador utilizou.
+                }
+
+            
+                    wcout<<"\n";
+
+                    wcout << "  _______       \n";
+                    wcout << " |/      |      \n";
+                    wcout << " |      " << (errou >= 1 ? '(' : ' ') << (errou >= 1 ? '_' : ' ') << (errou >= 1 ? ')' : ' ') << "  \n";
+                    wcout << " |      " << (errou >= 2 ? '\\' : ' ') << (errou >= 2 ? '|' : ' ') << (errou >= 2 ? '/' : ' ') << "  \n";
+                    wcout << " |       " << (errou >= 3 ? '|' : ' ') << "     \n";
+                    wcout << " |      " << (errou >= 4 ? '/' : ' ') << " " << (errou >= 5 ? '\\' : ' ') << "   \n";
+                    wcout << " |              \n";
+                    wcout << "_|___  ";
+                    for(i = 0; i < tamanho; i ++)
+                    {
+                        
+                    wcout<<forca[i];
+
+                    } // esse for exibe os chutes se for certo.
+
+                    
+
+                    wcout<<"\n"<<endl;
+                    wcout<<"Chute uma letra: "<<endl;
+                    wcin>>chute;
+            
+            system("cls");
+
+                if (chuteRepetido(chute[0])){ //recebe uma resposta booleana da função chuteRepetido(), true a palavra é repetida, false é valida.
+
+                    wcout<<"Palavra repetida!!\nPerdeu uma vida para ficar esperto <3\n "<<endl;
+                    vidas --;
+                    errou ++;
+
+                }else { 
+
+                    p_usada[i1 ++] = chute[0]; // atribui para o vetor usadas todos caracter do vetor chute na posição 0.
+
+                    for(i = 0; i < tamanho; i ++)
+                    {
+
+                        if (palavra[i] == chute[0]){
+                            acerto = true;
+                            forca[i] = palavra[i];
+                            acertos ++;
+
+                        }
+                        //esse for verifica se a letra está na palavra secreta, e se estive coloca a letra no lugar certo.
+
+                    }
+                    
+
+                    if(!acerto){
+
+                        vidas --;
+                        errou ++;
+                        //esse bloco serve para contabilizara as vidas, caso a pessoa erre vai diminuir a vida.
+                        //serve tambem para incrementar o vlaor da variavel errou, assim podendo formar a forca.
+                    }
+
+                    acerto = false;
+                    system("cls");
+        
+                }
+
+            
+
+            }
+
+            if(acertos == tamanho){
+
+                ganhou();
+            
+            }else
+            {
+
+                
+                perdeu();
+            }   
+
+
+}
+
+void modInsano(){
+     system("cls");
+    
+        i = 0;
+        i1 = 1;
+        tamanho = 0;
+        acertos = 0;
+        acerto = false;
+        vidas = 20;
+        errou = 0;
+        cdica = 0;
+        tempoMax = 30; 
+        intime = 5;
+
+        locale old_locale(locale::classic()); //salva o estado local
+
+            setlocale(LC_ALL,"portuguese");
+
+                wcout << "Qual a palavra que o jogador vai adivinhar? "<<endl;
+
+            locale::global(old_locale);//volta para linguagem de escopo global.
+
+                wcin>>palavra;
+                system("cls");
+
+            setlocale(LC_ALL,"portuguese");
+
+                wcout << "A palavra que você escolheu é?  Ex:(cidade, animal, fruta, etc...) "<<endl;
+
+            locale::global(old_locale);
+                wcin>>dica;
+                system("cls");
+            
+        while(palavra[i] != '\0' )
+        {
+
+            i ++;
+            tamanho ++;
+            /*esse bloco verifica o tamanho da palavra, o \0 indica o fim da palavra, enquando n chegar nele da lopp
+            e incrementa o tamanho*/
+        }
+
+        for(i = 0; i < 60; i++)
+        {
+
+            forca[i] = '_';
+            p_usada[i] = '-';
+            trollin[i] = '-';
+            /*Aqui os dois vetores são prenchidos até o tamanho 60, porém ao decorrer do código
+            apenas o tamanho da palavra secreta será exibida */
+
+        }
+        setlocale(LC_ALL,"portuguese");
+
+            wcout<<"Você tem: "<<tempoMax / 60 << "m "<<tempoMax % 60<<"s "<<"para adivinhar a palavra"<<endl;
+            wcout<<"O jogo começa em: "<<endl;
+
+        locale::global(old_locale); //volta para linguagem de escopo globa
+        
+        while( intime > 0 ){
+
+            wcout << intime << "\r" << flush;
+
+            sleep(1);
+
+            intime --;
+
+        }
+        
+        system("cls");
+
+        clock_t tempo_inicial = clock(); // nessa parte do jogo estamos colocando no tempo inicial a informação do tempo em que o jogo começou a executar.
+
+        while((vidas > 0) && (acertos < tamanho)) //loop principal onde roda o jogo.
+        {  setlocale(LC_ALL,"portuguese.1252");
+            checkTime( tempo_inicial, tempoMax); //manda info do tempo inicial, e o tempo max determinado no inicio da função.
+            
+                if(cdica >= vidas) {
+
+                        wcout<<"Dica: "<<dica<<endl;
+
+                    }
+                
+                    wcout<<"Vidas restante: "<<vidas<<endl;
+
+                    wcout<<"A palavra tem-"<<tamanho<<"-caracter"<<endl;
+
+                    wcout<<"letras usadas: ";
+
+                for( i = 0; i < 60; i ++){
+                    if(trollin[i] != '-'){
+                        wcout<<trollin[i]<<"-";
+                    }
+                    //Esse bloco mostra na tela as palavras que o jogador utilizou.
+                }
+
+            
+                    wcout<<"\n";
+
+                    wcout << "  _______       \n";
+                    wcout << " |/      |      \n";
+                    wcout << " |      " << (errou >= 1 ? '(' : ' ') << (errou >= 2 ? '_' : ' ') << (errou >= 3 ? ')' : ' ') << "  \n";
+                    wcout << " |      " << (errou >= 4 ? '\\' : ' ') << (errou >= 5 ? '|' : ' ') << (errou >= 6 ? '/' : ' ') << "  \n";
+                    wcout << " |       " << (errou >= 7 ? '|' : ' ') << "     \n";
+                    wcout << " |      " << (errou >= 8 ? '/' : ' ') << " " << (errou >= 9 ? '\\' : ' ') << "   \n";
+                    wcout << " |              \n";
+                    wcout << "_|___  ";
+                    for(i = 0; i < tamanho; i ++)
+                    {
+                        
+                    wcout<<forca[i];
+
+                    } // esse for exibe os chutes se for certo.
+
+                    
+
+                    wcout<<"\n"<<endl;
+                    wcout<<"Chute uma letra: "<<endl;
+                    wcin>>chute;
+            
+            system("cls");
+
+                if (chuteRepetido(chute[0])){ //recebe uma resposta booleana da função chuteRepetido(), true a palavra é repetida, false é valida.
+
+                    wcout<<"Palavra repetida!!\nPerdeu uma vida para ficar esperto <3\n "<<endl;
+                    vidas --;
+                    errou ++;
+
+                }else { 
+
+                    p_usada[i1 ++] = chute[0] ; // atribui para o vetor usadas todos caracter do vetor chute na posição 0.
+                    trollin[i1] = 'X';
+
+                    for(i = 0; i < tamanho; i ++)
+                    {
+
+                        if (palavra[i] == chute[0]){
+                            acerto = true;
+                            forca[i] = palavra[i];
+                            acertos ++;
+
+                        }
+                        //esse for verifica se a letra está na palavra secreta, e se estive coloca a letra no lugar certo.
+
+                    }
+                    
+
+                    if(!acerto){
+
+                        vidas --;
+                        errou ++;
+                        //esse bloco serve para contabilizara as vidas, caso a pessoa erre vai diminuir a vida.
+                        //serve tambem para incrementar o vlaor da variavel errou, assim podendo formar a forca.
+                    }
+
+                    acerto = false;
+                    system("cls");
+        
+                }
+
+            
+
+            }
+
+            if(acertos == tamanho){
+
+                ganhou();
+            
+            }else
+            {
+
+                
+                perdeu();
+            }   
+
+}
+
 
 bool chuteRepetido(wchar_t caracter){ // recebe informação do chute do jogo.
 
@@ -299,6 +857,7 @@ void tempoEsgotado(){
 
 
         wcout << "TEMPO ESGOTADO "<<endl;
+        wcout<<"A palavra era: "<<palavra<<endl;
         wcout << "  _____          __  __ ______      \n";
         wcout << " / ____|   /\\   |  \\/  |  ____|  \n";
         wcout << "| |  __   /  \\  | \\  / | |__   \n";
