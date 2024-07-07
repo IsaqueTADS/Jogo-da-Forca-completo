@@ -22,13 +22,11 @@ using namespace std;
    bool chuteRepetido(wchar_t caracter);
    void checkTime(clock_t tempo_inicial, int tempoMax);
    void tempoEsgotado();
-   void exibirForca();
-  
  
 
 int main(){
 
-    setlocale(LC_ALL,"portuguese");
+    setlocale(LC_ALL,"portuguese.1252");
     
     inicio();
 
@@ -53,15 +51,8 @@ void inicio(){
 
 }
 
-void CaracterMultiByte(){
-
-    setlocale(LC_ALL,"portuguese.1252");
-    
-}
-
-
 void dificuldade(){
-
+    setlocale(LC_ALL,"portuguese");
       system("cls");
 
         wcout<<"DIFICULDADE DO JOGO !\n "<<endl;
@@ -107,13 +98,18 @@ void facil (){
          tempoMax = 180; 
          intime = 5;
 
+         locale old_locale(locale::classic()); //salva o estado local
+         setlocale(LC_ALL,"portuguese");
          wcout << "Qual a palavra que o jogador vai adivinhar? "<<endl;
+         locale::global(old_locale);//volta para linguagem de escopo global.
          wcin>>palavra;
          system("cls");
+         setlocale(LC_ALL,"portuguese");
          wcout << "A palavra que você escolheu é?  Ex:(cidade, animal, fruta, etc...) "<<endl;
+         locale::global(old_locale);
          wcin>>dica;
          system("cls");
-
+            
          while(palavra[i] != '\0' )
          {
 
@@ -132,9 +128,10 @@ void facil (){
             apenas o tamanho da palavra secreta será exibida */
 
          }
-         CaracterMultiByte();
+         setlocale(LC_ALL,"portuguese");
          wcout<<"Você terá: "<<tempoMax / 60 << "m"<<endl;
          wcout<<"O jogo começa em: "<<endl;
+         locale::global(old_locale); //volta para linguagem de escopo global
          while( intime > 0 ){
 
             wcout << intime << "\r" << flush;
@@ -152,7 +149,7 @@ void facil (){
          clock_t tempo_inicial = clock(); // nessa parte do jogo estamos colocando no tempo inicial a informação do tempo em que o jogo começou a executar.
 
          while((vidas > 0) && (acertos < tamanho)) //loop principal onde roda o jogo.
-         {
+         {  setlocale(LC_ALL,"portuguese.1252");
             checkTime( tempo_inicial, tempoMax); //manda info do tempo inicial, e o tempo max determinado no inicio da função.
             
                 if(cdica >= vidas) {
