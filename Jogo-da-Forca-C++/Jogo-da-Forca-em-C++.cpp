@@ -71,6 +71,8 @@ void inicio(){
 
 void chamadaOne(){
 
+    setlocale(LC_ALL,"portuguese");
+
     cout<<"MODO DE JOGO"<<endl;
     cout<<"[1]MultiPlayer"<<endl;
     cout<<"[2]SinglePlayer"<<endl;
@@ -78,8 +80,12 @@ void chamadaOne(){
     do{cin>>opc;
 
     if ( opc != 1 && opc !=2 ){
+        system("cls");
         cout<<"[ERRO]Modo Invalído "<<endl;
+        cout<<"[1]MultiPlayer"<<endl;
+        cout<<"[2]SinglePlayer"<<endl;
         cout<<"Escolha novamente !"<<endl;
+
         }
 
     }while ( opc != 1 && opc != 2);
@@ -317,13 +323,13 @@ void modfacil (){
 
             if(acertos == tamanho){
 
-                ganhou();
+                singGanhou();
             
             }else
             {
 
                 
-                perdeu();
+                singPerdeu();
             }   
 
 
@@ -496,13 +502,13 @@ void modNormal(){
 
             if(acertos == tamanho){
 
-                ganhou();
+                singGanhou();
             
             }else
             {
 
                 
-                perdeu();
+                singPerdeu();
             }   
 
 }
@@ -671,13 +677,13 @@ void modDificil(){
 
             if(acertos == tamanho){
 
-                ganhou();
+                singGanhou();
             
             }else
             {
 
                 
-                perdeu();
+                singPerdeu();
             }   
 
 
@@ -848,13 +854,13 @@ void modInsano(){
 
             if(acertos == tamanho){
 
-                ganhou();
+                singGanhou();
             
             }else
             {
 
                 
-                perdeu();
+                singPerdeu();
             }   
 
 }
@@ -890,6 +896,18 @@ void singleplayer(){
             case 1:
 
             singFacil();
+
+            case 2:
+
+            singNormal();
+
+            case 3:
+
+            singDificil();
+
+            case 4:
+
+            singInsano();
             
             case 5:
 
@@ -1504,7 +1522,7 @@ void singInsano(){
 
                 for( i = 0; i < 60; i ++){
                     if(p_usada[i] != '-'){
-                        wcout<<p_usada[i]<<"-";
+                        wcout<<trollin[i]<<"-";
                     }
                     //Esse bloco mostra na tela as palavras que o jogador utilizou.
                 }
@@ -1544,7 +1562,7 @@ void singInsano(){
                 }else { 
 
                     p_usada[i1 ++] = chute[0]; // atribui para o vetor usadas todos caracter do vetor chute na posição 0.
-
+                    trollin[i1] = 'X';
                     for(i = 0; i < tamanho; i ++)
                     {
 
@@ -1836,7 +1854,6 @@ void singPerdeu(){
     
         wcout << "VOCÊ PERDEU!! "<<endl;
         wcout << " A palavra era: "<<palavraSing<<endl;
-        wcout<<"A palavra era: "<<palavra<<endl;
         wcout << "  _____          __  __ ______      \n";
         wcout << " / ____|   /\\   |  \\/  |  ____|  \n";
         wcout << "| |  __   /  \\  | \\  / | |__   \n";
@@ -1859,7 +1876,7 @@ void singPerdeu(){
             if (opc == 1)
             {
 
-                dificuldade();
+                singleplayer();
 
             }else{
                     
@@ -1881,7 +1898,7 @@ void singTimeout(){
 
 
         wcout << "TEMPO ESGOTADO "<<endl;
-        wcout<<"A palavra era: "<<palavra<<endl;
+        wcout<<"A palavra era: "<<palavraSing<<endl;
         wcout << "  _____          __  __ ______      \n";
         wcout << " / ____|   /\\   |  \\/  |  ____|  \n";
         wcout << "| |  __   /  \\  | \\  / | |__   \n";
