@@ -1608,7 +1608,7 @@ void singInsano(){
 
 }
 
-string escolherAleatorio( const vector<std::string>& lista){
+string escolherAleatorio( const vector<::string> & lista ){
 
     int indiceAleatorio = rand() % lista.size();
 
@@ -1618,13 +1618,14 @@ string escolherAleatorio( const vector<std::string>& lista){
 
 pair<string, string> listaAleatoria(){
 
-    // Inicializa o gerador de números aleatórios
-    srand(time(nullptr));
+   
+    srand(time(nullptr)); // Inicializa o gerador de números aleatórios
 
-    vector<::string> categorias = {"Animais", "Frutas","cidades_brasileira"};
+    vector<::string> categorias = {"Animais", "Frutas","Cidades_brasileira","Instrumentos"};
     vector<::string> nomeAnimais = {"elefante", "girafa", "cachorro", "gato", "leao", "tigre", "coelho", "cavalo", "cavalo", "panda", "pinguim","zebra", "macaco", "urso", "rinoceronte", "canguru", "gorila", "jacare", "sapo", "papagaio", "baleia", "polvo", "cisne", "tartaruga", "caranguejo", "raposa", "peixe_boi", "suricato", "golfinho", "aguia", "foca", "lobo", "panda_vermelho", "pinguim", "elefante_marinho", "leao_marinho", "tucano", "arara", "chimpanze", "puma", "jaguatirica", "tamandua", "texugo", "iaque", "anta", "orangotango", "gnu", "ovelha", "girino"};
     vector<::string> nomeFrutas = {"maca", "banana", "laranja", "morango", "melancia", "pera", "uva", "abacaxix", "manga", "limao", "abacate","acelora","amora","caju","caqui","caqui","carambola","cereja","coco","damasco","framboesa","goiaba","jabuticaba","jaca","kiwi","pera","pessego","pessego","pitaya","roma","tangerina"};
     vector<::string> nomeCidades = {"sao_paulo", "rio_de_janeiro", "brasilia", "salvador", "fortaleza", "belo_horizonte", "manaus", "curitiba", "recife", "porto alegre", "belem", "goiania", "campinas", "sao luis", "guarulhos", "sao goncalo", "maceio", "duque de caxias", "natal", "teresina", "campo grande", "joao pessoa", "sao_bernardo_do_campo", "osasco", "santo_andre", "jaboatao_dos_guararapes", "ribeirao_preto", "contagem", "sao_jose_dos_campos", "uberlandia", "sorocaba", "cuiaba", "feira_de_santana", "aracaju", "joinville", "londrina", "niteroi", "ananindeua", "belford_roxo", "campos_dos_goytacazes", "sao_joao_de_meriti", "carapicuiba", "ponta_grossa", "maua", "macapa", "vitoria", "montes claros"};
+    vector<::string> nomeInstrumentos = {"violao", "guitarra", "piano", "bateria", "baixo", "violino", "saxofone", "flauta", "trompete", "teclado", "acordeao","ukulele", "clarinete", "gaita", "cello", "bandolim", "oboe", "cavaquinho", "bongo", "marimba", "harpa"};
 
     string categoriaEscolhida = escolherAleatorio(categorias);
     string nomeEscolhido;
@@ -1637,9 +1638,13 @@ pair<string, string> listaAleatoria(){
  
         nomeEscolhido = escolherAleatorio(nomeFrutas);
 
-    }else if ( categoriaEscolhida == "cidades_brasileira"){
+    }else if ( categoriaEscolhida == "Cidades_brasileira"){
 
         nomeEscolhido = escolherAleatorio(nomeCidades);
+        
+    }else if ( categoriaEscolhida == "Instrumentos"){
+
+        nomeEscolhido = escolherAleatorio(nomeInstrumentos);
     }
 
 
@@ -1675,7 +1680,16 @@ void checkTime( clock_t tempo_inicial, int tempoMax){
 
     if ( tempo_decorrido >= tempoMax){ //bloco que verifica se o tempo já excedeu o tempo maximo, caso sim ele vai levar o jogo para uma função que vai terinar o jogo.
 
-        tempoEsgotado();
+       if (palavra[0] != '\0'){
+
+         tempoEsgotado();
+
+         }else{
+
+        singTimeout();
+
+        }
+
     }
 }
 
@@ -1766,25 +1780,30 @@ void perdeu (){
 
     setlocale(LC_ALL,"portuguese");
 
+
+        cout << "  _______  \n";
+        cout << " /       \\ \n";
+        cout << "|  X   X  |\n";
+        cout << "|    ^    |\n";
+        cout << "|   ___  |\n";
+        cout << " \\_______/ \n";
         wcout<<"Poxa você perdeu e foi enfocardo ;-;-; ";
         wcout<<"A palavra era: "<<palavra<<endl;
-            
-        wcout<<"    _______________         \n";
-        wcout<<"   /               \\       \n"; 
-        wcout<<"  /                 \\      \n";
-        wcout<<"//                   \\/\\  \n";
-        wcout<<"\\|   XXXX     XXXX   | /   \n";
-        wcout<<" |   XXXX     XXXX   |/     \n";
-        wcout<<" |   XXX       XXX   |      \n";
-        wcout<<" |                   |      \n";
-        wcout<<" \\__      XXX      __/     \n";
-        wcout<<"   |\\     XXX     /|       \n";
-        wcout<<"   | |           | |        \n";
-        wcout<<"   | I I I I I I I |        \n";
-        wcout<<"   |  I I I I I I  |        \n";
-        wcout<<"   \\_             _/       \n";
-        wcout<<"     \\_         _/         \n";
-        wcout<<"       \\_______/           \n\n";
+        
+
+        wcout << "  _____          __  __ ______      \n";
+        wcout << " / ____|   /\\   |  \\/  |  ____|  \n";
+        wcout << "| |  __   /  \\  | \\  / | |__   \n";
+        wcout << "| | |_ | / /\\ \\ | |\\/| |  __|    \n";
+        wcout << "| |__| |/ ____ \\| |  | | |____   \n";
+        wcout << " \\_____/_/    \\_\\_|  |_|______| \n";
+
+        wcout << "  _____      ________ _____  \n";
+        wcout << " / __ \\ \\    / /  ____|  __ \\ \n";
+        wcout << "| |  | \\ \\  / /| |__  | |__) | \n";
+        wcout << "| |  | |\\ \\/ / |  __| |  _  /  \n";
+        wcout << "|_|  | | \\  /  |  |___| \\ \\  \n";
+        wcout << " \\____/   \\/   |______|_|  \\_\\ \n";
 
 
         wcout<<"Jogar novamente? "<<endl;
@@ -1851,9 +1870,17 @@ void perdeu (){
 void singPerdeu(){
 
     setlocale(LC_ALL,"portuguese");
-    
-        wcout << "VOCÊ PERDEU!! "<<endl;
-        wcout << " A palavra era: "<<palavraSing<<endl;
+
+        cout << "  _______  \n";
+        cout << " /       \\ \n";
+        cout << "|  X   X  |\n";
+        cout << "|    ^    |\n";
+        cout << "|   ___  |\n";
+        cout << " \\_______/ \n";
+        wcout<<"Poxa você perdeu e foi enfocardo ;-;-; ";
+        wcout<<"A palavra era: "<<palavra<<endl;
+        
+
         wcout << "  _____          __  __ ______      \n";
         wcout << " / ____|   /\\   |  \\/  |  ____|  \n";
         wcout << "| |  __   /  \\  | \\  / | |__   \n";
@@ -1912,6 +1939,7 @@ void singTimeout(){
         wcout << "| |  | |\\ \\/ / |  __| |  _  /  \n";
         wcout << "|_|  | | \\  /  |  |___| \\ \\  \n";
         wcout << " \\____/   \\/   |______|_|  \\_\\ \n";
+       
 
         wcout<<"Jogar novamente? "<<endl;
             wcout<<"[1] jogar novamente "<<endl;
