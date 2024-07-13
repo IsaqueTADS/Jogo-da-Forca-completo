@@ -37,7 +37,7 @@ using namespace std;
    void singPerdeu();
    void singTimeout();
    string escolherAleatorio();
-   pair<string, string> listaAleatoria();
+   pair<string, string> BancodePalavras();
 
 
 
@@ -105,55 +105,55 @@ void chamadaOne(){
 void dificuldade(){
 
     setlocale(LC_ALL,"portuguese");
-      system("cls");
-        
-        wcout<<"DIFICULDADE DO JOGO !\n "<<endl;
+    system("cls");
+    
+    wcout<<"DIFICULDADE DO JOGO !\n "<<endl;
 
-        wcout<<"[1] Facil  [3] Dificil"<<endl;
-        wcout<<"[2] Normal [4] INSANOO"<<endl;
-        wcout<<"[5] Sair "<<endl;
-        wcout<<"Escolha uma das opções acima: "<<endl;
-        do{ wcin>>difi;
+    wcout<<"[1] Facil  [3] Dificil"<<endl;
+    wcout<<"[2] Normal [4] INSANOO"<<endl;
+    wcout<<"[5] Sair "<<endl;
+    wcout<<"Escolha uma das opções acima: "<<endl;
+    do{ wcin>>difi;
+
+    system("cls");
+
+    wcout<<"[ERRO] DIGITO INVÁLIDO !\nDigite novamente!\n "<<endl;
+
+    wcout<<"[1] Facil  [3] Dificil"<<endl;
+    wcout<<"[2] Normal [4] INSANOO"<<endl;
+    wcout<<"[5] Sair "<<endl;
+    wcout<<"Escolha uma das opções acima: "<<endl;
+    
+    
+    }while(difi != 1 && difi != 2 && difi !=3 && difi != 4 && difi != 5);
+
+    switch(difi){
+
+        case 1:
+
+        modfacil();
+
+        case 2:
+
+        modNormal();
+
+        case 3:
+
+        modDificil();
+
+        case 4:
+        
+        modInsano();
+        
+        case 5:
 
         system("cls");
 
-        wcout<<"[ERRO] DIGITO INVÁLIDO !\nDigite novamente!\n "<<endl;
+        wcout<<"DESISTIU NÉ ;-; ;-; ;-; "<<endl;
 
-        wcout<<"[1] Facil  [3] Dificil"<<endl;
-        wcout<<"[2] Normal [4] INSANOO"<<endl;
-        wcout<<"[5] Sair "<<endl;
-        wcout<<"Escolha uma das opções acima: "<<endl;
-        
-        
-        }while(difi != 1 && difi != 2 && difi !=3 && difi != 4 && difi != 5);
+        exit(0);
 
-        switch(difi){
-
-            case 1:
-
-            modfacil();
-
-            case 2:
-
-            modNormal();
-
-            case 3:
-
-            modDificil();
-
-            case 4:
-            
-            modInsano();
-            
-            case 5:
-
-            system("cls");
-
-            wcout<<"DESISTIU NÉ ;-; ;-; ;-; "<<endl;
-
-            exit(0);
-
-        }
+    }
 
 
 }
@@ -940,7 +940,7 @@ void singFacil(){
         intime = 5;
        
         
-        pair<string, string> nomeElemento = listaAleatoria();
+        pair<string, string> nomeElemento = BancodePalavras();
 
         memset(palavraSing, '\0', 60); // Inicializa todo vetor com '\0'
         strcpy(palavraSing, nomeElemento.first.c_str());
@@ -1113,7 +1113,7 @@ void singNormal(){
         intime = 5;
        
         
-        pair<string, string> nomeElemento = listaAleatoria();
+        pair<string, string> nomeElemento = BancodePalavras();
 
         memset(palavraSing, '\0', 60); // Inicializa todo vetor com '\0'
         strcpy(palavraSing, nomeElemento.first.c_str());
@@ -1284,7 +1284,7 @@ void singDificil(){
         intime = 5;
        
         
-        pair<string, string> nomeElemento = listaAleatoria();
+        pair<string, string> nomeElemento = BancodePalavras();
 
         memset(palavraSing, '\0', 60); // Inicializa todo vetor com '\0'
         strcpy(palavraSing, nomeElemento.first.c_str());
@@ -1439,7 +1439,7 @@ void singDificil(){
    
 void singInsano(){
 
-     srand(time(0));
+     
 
     system("cls");
     
@@ -1455,7 +1455,7 @@ void singInsano(){
         intime = 5;
        
         
-        pair<string, string> nomeElemento = listaAleatoria();
+        pair<string, string> nomeElemento = BancodePalavras();
 
         memset(palavraSing, '\0', 60); // Inicializa todo vetor com '\0'
         strcpy(palavraSing, nomeElemento.first.c_str());
@@ -1608,18 +1608,19 @@ void singInsano(){
 
 }
 
-string escolherAleatorio( const vector<::string> & lista ){
+string escolherAleatorio( const vector<::string> & lista ){ // & passa dados por referencia não por valor. const não permite que a função altere os dados.
 
-    int indiceAleatorio = rand() % lista.size();
+    int indiceAleatorio = rand() % lista.size(); // rand() gera um numero entre 0 e o RAND_MAX,lista.size retorna a quantidade de elementos dentro da lista.
+    // então suponhamos rand() == 7 e lista.size() == 2, teriamos o módulo de 7 % 2 = 1, assim o indice aleatorio seria 1.
 
-    return lista[indiceAleatorio];
+    return lista[indiceAleatorio]; // retorna um indice aleatorio. 
 
 }
 
-pair<string, string> listaAleatoria(){
+pair<string, string> BancodePalavras(){
 
    
-    srand(time(nullptr)); // Inicializa o gerador de números aleatórios
+    srand(time(nullptr)); // Inicializa o gerador de números aleatórios, para garantir que rand() gere um número pseudoaleatorio a cada execução.
 
     vector<::string> categorias = {"Animais", "Frutas","Cidades_brasileira","Instrumentos"};
     vector<::string> nomeAnimais = {"elefante", "girafa", "cachorro", "gato", "leao", "tigre", "coelho", "cavalo", "cavalo", "panda", "pinguim","zebra", "macaco", "urso", "rinoceronte", "canguru", "gorila", "jacare", "sapo", "papagaio", "baleia", "polvo", "cisne", "tartaruga", "caranguejo", "raposa", "peixe_boi", "suricato", "golfinho", "aguia", "foca", "lobo", "panda_vermelho", "pinguim", "elefante_marinho", "leao_marinho", "tucano", "arara", "chimpanze", "puma", "jaguatirica", "tamandua", "texugo", "iaque", "anta", "orangotango", "gnu", "ovelha", "girino"};
@@ -1627,12 +1628,12 @@ pair<string, string> listaAleatoria(){
     vector<::string> nomeCidades = {"sao_paulo", "rio_de_janeiro", "brasilia", "salvador", "fortaleza", "belo_horizonte", "manaus", "curitiba", "recife", "porto alegre", "belem", "goiania", "campinas", "sao luis", "guarulhos", "sao goncalo", "maceio", "duque de caxias", "natal", "teresina", "campo grande", "joao pessoa", "sao_bernardo_do_campo", "osasco", "santo_andre", "jaboatao_dos_guararapes", "ribeirao_preto", "contagem", "sao_jose_dos_campos", "uberlandia", "sorocaba", "cuiaba", "feira_de_santana", "aracaju", "joinville", "londrina", "niteroi", "ananindeua", "belford_roxo", "campos_dos_goytacazes", "sao_joao_de_meriti", "carapicuiba", "ponta_grossa", "maua", "macapa", "vitoria", "montes claros"};
     vector<::string> nomeInstrumentos = {"violao", "guitarra", "piano", "bateria", "baixo", "violino", "saxofone", "flauta", "trompete", "teclado", "acordeao","ukulele", "clarinete", "gaita", "cello", "bandolim", "oboe", "cavaquinho", "bongo", "marimba", "harpa"};
 
-    string categoriaEscolhida = escolherAleatorio(categorias);
+    string categoriaEscolhida = escolherAleatorio(categorias); //manda para o seletor de indice aleatorio, para assim escolher uma categoria aleatoria.
     string nomeEscolhido;
 
-    if ( categoriaEscolhida == "Animais"){
+    if ( categoriaEscolhida == "Animais"){ //esse bloco manda de acordo com a categoria escolhida aleatoriamente escolher dentro dessa categoria um nome.
 
-        nomeEscolhido = escolherAleatorio(nomeAnimais);
+        nomeEscolhido = escolherAleatorio(nomeAnimais); //aqui esta mandando por eemplo, escolher aleatoriamente dentro do vector nomeAnimais.
 
     }else if ( categoriaEscolhida == "Frutas"){
  
@@ -1780,13 +1781,6 @@ void perdeu (){
 
     setlocale(LC_ALL,"portuguese");
 
-
-        cout << "  _______  \n";
-        cout << " /       \\ \n";
-        cout << "|  X   X  |\n";
-        cout << "|    ^    |\n";
-        cout << "|   ___  |\n";
-        cout << " \\_______/ \n";
         wcout<<"Poxa você perdeu e foi enfocardo ;-;-; ";
         wcout<<"A palavra era: "<<palavra<<endl;
         
@@ -1870,15 +1864,9 @@ void perdeu (){
 void singPerdeu(){
 
     setlocale(LC_ALL,"portuguese");
-
-        cout << "  _______  \n";
-        cout << " /       \\ \n";
-        cout << "|  X   X  |\n";
-        cout << "|    ^    |\n";
-        cout << "|   ___  |\n";
-        cout << " \\_______/ \n";
+    
         wcout<<"Poxa você perdeu e foi enfocardo ;-;-; ";
-        wcout<<"A palavra era: "<<palavra<<endl;
+        wcout<<"A palavra era: "<<palavraSing<<endl;
         
 
         wcout << "  _____          __  __ ______      \n";
@@ -1965,4 +1953,3 @@ void singTimeout(){
 
     
 }
-
