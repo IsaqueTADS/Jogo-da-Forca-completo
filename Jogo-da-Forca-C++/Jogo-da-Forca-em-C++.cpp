@@ -38,6 +38,7 @@ using namespace std;
    void singTimeout();
    string escolherAleatorio();
    pair<string, string> BancodePalavras();
+   void limparTela();
 
 
 
@@ -52,7 +53,13 @@ int main(){
     return 0;
 }
 
-
+ void limparTela(){
+    #ifdef _WIN32
+        system("cls");
+    #else
+        system("clear");
+    #endif
+ }
 
 void inicio(){
 
@@ -63,11 +70,9 @@ void inicio(){
 
     wcout<<"Instragam:\n@isaquetads \n@isaque_rodriguesdev\n\n "<<endl;
     system("pause");
-    system("cls");
-
+    limparTela();
 
 }
-
 
 void chamadaOne(){
 
@@ -80,7 +85,7 @@ void chamadaOne(){
     do{cin>>opc;
 
     if ( opc != 1 && opc !=2 ){
-        system("cls");
+        limparTela();
         cout<<"[ERRO]Modo Invalído "<<endl;
         cout<<"[1]MultiPlayer"<<endl;
         cout<<"[2]SinglePlayer"<<endl;
@@ -105,7 +110,7 @@ void chamadaOne(){
 void dificuldade(){
 
     setlocale(LC_ALL,"portuguese");
-    system("cls");
+    limparTela();
     
     wcout<<"DIFICULDADE DO JOGO !\n "<<endl;
 
@@ -115,7 +120,7 @@ void dificuldade(){
     wcout<<"Escolha uma das opções acima: "<<endl;
     do{ wcin>>difi;
 
-    system("cls");
+    limparTela();
 
     wcout<<"[ERRO] DIGITO INVÁLIDO !\nDigite novamente!\n "<<endl;
 
@@ -147,7 +152,7 @@ void dificuldade(){
         
         case 5:
 
-        system("cls");
+        limparTela();
 
         wcout<<"DESISTIU NÉ ;-; ;-; ;-; "<<endl;
 
@@ -160,7 +165,7 @@ void dificuldade(){
 
 void modfacil (){
    
-    system("cls");
+    limparTela();
     
         i = 0;
         i1 = 1;
@@ -182,7 +187,7 @@ void modfacil (){
             locale::global(old_locale);//volta para linguagem de escopo global.
 
                 wcin>>palavra;
-                system("cls");
+                limparTela();
 
             setlocale(LC_ALL,"portuguese");
 
@@ -190,7 +195,7 @@ void modfacil (){
 
             locale::global(old_locale);
                 wcin>>dica;
-                system("cls");
+                limparTela();
             
         while(palavra[i] != '\0' )
         {
@@ -227,7 +232,7 @@ void modfacil (){
 
         }
         
-        system("cls");
+        limparTela();
 
         clock_t tempo_inicial = clock(); // nessa parte do jogo estamos colocando no tempo inicial a informação do tempo em que o jogo começou a executar.
 
@@ -278,7 +283,7 @@ void modfacil (){
                     wcout<<"Chute uma letra: "<<endl;
                     wcin>>chute;
             
-            system("cls");
+            limparTela();
 
                 if (chuteRepetido(chute[0])){ //recebe uma resposta booleana da função chuteRepetido(), true a palavra é repetida, false é valida.
 
@@ -313,7 +318,7 @@ void modfacil (){
                     }
 
                     acerto = false;
-                    system("cls");
+                    limparTela();
         
                 }
 
@@ -339,7 +344,7 @@ void modfacil (){
 
 void modNormal(){
 
-   system("cls");
+   limparTela();
     
         i = 0;
         i1 = 1;
@@ -361,7 +366,7 @@ void modNormal(){
             locale::global(old_locale);//volta para linguagem de escopo global.
 
                 wcin>>palavra;
-                system("cls");
+                limparTela();
 
             setlocale(LC_ALL,"portuguese");
 
@@ -369,7 +374,7 @@ void modNormal(){
 
             locale::global(old_locale);
                 wcin>>dica;
-                system("cls");
+                limparTela();
             
         while(palavra[i] != '\0' )
         {
@@ -406,7 +411,7 @@ void modNormal(){
 
         }
         
-        system("cls");
+        limparTela();
 
         clock_t tempo_inicial = clock(); // nessa parte do jogo estamos colocando no tempo inicial a informação do tempo em que o jogo começou a executar.
 
@@ -457,7 +462,7 @@ void modNormal(){
                     wcout<<"Chute uma letra: "<<endl;
                     wcin>>chute;
             
-            system("cls");
+            limparTela();
 
                 if (chuteRepetido(chute[0])){ //recebe uma resposta booleana da função chuteRepetido(), true a palavra é repetida, false é valida.
 
@@ -492,7 +497,7 @@ void modNormal(){
                     }
 
                     acerto = false;
-                    system("cls");
+                    limparTela();
         
                 }
 
@@ -514,7 +519,7 @@ void modNormal(){
 }
 
 void modDificil(){
-     system("cls");
+     limparTela();
     
         i = 0;
         i1 = 1;
@@ -536,7 +541,7 @@ void modDificil(){
             locale::global(old_locale);//volta para linguagem de escopo global.
 
                 wcin>>palavra;
-                system("cls");
+                limparTela();
 
             setlocale(LC_ALL,"portuguese");
 
@@ -544,7 +549,7 @@ void modDificil(){
 
             locale::global(old_locale);
                 wcin>>dica;
-                system("cls");
+                limparTela();
             
         while(palavra[i] != '\0' )
         {
@@ -581,7 +586,7 @@ void modDificil(){
 
         }
         
-        system("cls");
+        limparTela();
 
         clock_t tempo_inicial = clock(); // nessa parte do jogo estamos colocando no tempo inicial a informação do tempo em que o jogo começou a executar.
 
@@ -632,7 +637,7 @@ void modDificil(){
                     wcout<<"Chute uma letra: "<<endl;
                     wcin>>chute;
             
-            system("cls");
+            limparTela();
 
                 if (chuteRepetido(chute[0])){ //recebe uma resposta booleana da função chuteRepetido(), true a palavra é repetida, false é valida.
 
@@ -667,7 +672,7 @@ void modDificil(){
                     }
 
                     acerto = false;
-                    system("cls");
+                    limparTela();
         
                 }
 
@@ -690,7 +695,7 @@ void modDificil(){
 }
 
 void modInsano(){
-     system("cls");
+     limparTela();
     
         i = 0;
         i1 = 1;
@@ -712,7 +717,7 @@ void modInsano(){
             locale::global(old_locale);//volta para linguagem de escopo global.
 
                 wcin>>palavra;
-                system("cls");
+                limparTela();
 
             setlocale(LC_ALL,"portuguese");
 
@@ -720,7 +725,7 @@ void modInsano(){
 
             locale::global(old_locale);
                 wcin>>dica;
-                system("cls");
+                limparTela();
             
         while(palavra[i] != '\0' )
         {
@@ -758,7 +763,7 @@ void modInsano(){
 
         }
         
-        system("cls");
+        limparTela();
 
         clock_t tempo_inicial = clock(); // nessa parte do jogo estamos colocando no tempo inicial a informação do tempo em que o jogo começou a executar.
 
@@ -808,7 +813,7 @@ void modInsano(){
                     wcout<<"Chute uma letra: "<<endl;
                     wcin>>chute;
             
-            system("cls");
+            limparTela();
 
                 if (chuteRepetido(chute[0])){ //recebe uma resposta booleana da função chuteRepetido(), true a palavra é repetida, false é valida.
 
@@ -844,7 +849,7 @@ void modInsano(){
                     }
 
                     acerto = false;
-                    system("cls");
+                    limparTela();
         
                 }
 
@@ -869,7 +874,7 @@ void modInsano(){
 void singleplayer(){
 
  setlocale(LC_ALL,"portuguese");
-      system("cls");
+      limparTela();
         
         wcout<<"DIFICULDADE DO JOGO !\n "<<endl;
 
@@ -879,7 +884,7 @@ void singleplayer(){
         wcout<<"Escolha uma das opções acima: "<<endl;
         do{ wcin>>difi;
 
-        system("cls");
+        limparTela();
 
         wcout<<"[ERRO] DIGITO INVÁLIDO !\nDigite novamente!\n "<<endl;
 
@@ -911,7 +916,7 @@ void singleplayer(){
             
             case 5:
 
-            system("cls");
+            limparTela();
 
             wcout<<"DESISTIU NÉ ;-; ;-; ;-; "<<endl;
 
@@ -926,7 +931,7 @@ void singFacil(){
 
     srand(time(0));
 
-    system("cls");
+    limparTela();
     
         i = 0;
         i1 = 1;
@@ -988,7 +993,7 @@ void singFacil(){
 
         }
         
-        system("cls");
+        limparTela();
 
         clock_t tempo_inicial = clock(); // nessa parte do jogo estamos colocando no tempo inicial a informação do tempo em que o jogo começou a executar.
 
@@ -1036,7 +1041,7 @@ void singFacil(){
                     wcout<<"Chute uma letra: "<<endl;
                     wcin>>chute;
             
-            system("cls");
+            limparTela();
 
                 if (chuteRepetido(chute[0])){ //recebe uma resposta booleana da função chuteRepetido(), true a palavra é repetida, false é valida.
 
@@ -1071,7 +1076,7 @@ void singFacil(){
                     }
 
                     acerto = false;
-                    system("cls");
+                    limparTela();
         
                 }
 
@@ -1099,7 +1104,7 @@ void singNormal(){
 
      srand(time(0));
 
-    system("cls");
+    limparTela();
     
         i = 0;
         i1 = 1;
@@ -1161,7 +1166,7 @@ void singNormal(){
 
         }
         
-        system("cls");
+        limparTela();
 
         clock_t tempo_inicial = clock(); // nessa parte do jogo estamos colocando no tempo inicial a informação do tempo em que o jogo começou a executar.
 
@@ -1209,7 +1214,7 @@ void singNormal(){
                     wcout<<"Chute uma letra: "<<endl;
                     wcin>>chute;
             
-            system("cls");
+            limparTela();
 
                 if (chuteRepetido(chute[0])){ //recebe uma resposta booleana da função chuteRepetido(), true a palavra é repetida, false é valida.
 
@@ -1244,7 +1249,7 @@ void singNormal(){
                     }
 
                     acerto = false;
-                    system("cls");
+                    limparTela();
         
                 }
 
@@ -1270,7 +1275,7 @@ void singDificil(){
 
      srand(time(0));
 
-    system("cls");
+    limparTela();
     
         i = 0;
         i1 = 1;
@@ -1332,7 +1337,7 @@ void singDificil(){
 
         }
         
-        system("cls");
+        limparTela();
 
         clock_t tempo_inicial = clock(); // nessa parte do jogo estamos colocando no tempo inicial a informação do tempo em que o jogo começou a executar.
 
@@ -1380,7 +1385,7 @@ void singDificil(){
                     wcout<<"Chute uma letra: "<<endl;
                     wcin>>chute;
             
-            system("cls");
+            limparTela();
 
                 if (chuteRepetido(chute[0])){ //recebe uma resposta booleana da função chuteRepetido(), true a palavra é repetida, false é valida.
 
@@ -1415,7 +1420,7 @@ void singDificil(){
                     }
 
                     acerto = false;
-                    system("cls");
+                    limparTela();
         
                 }
 
@@ -1441,7 +1446,7 @@ void singInsano(){
 
      
 
-    system("cls");
+    limparTela();
     
         i = 0;
         i1 = 1;
@@ -1503,7 +1508,7 @@ void singInsano(){
 
         }
         
-        system("cls");
+        limparTela();
 
         clock_t tempo_inicial = clock(); // nessa parte do jogo estamos colocando no tempo inicial a informação do tempo em que o jogo começou a executar.
 
@@ -1551,7 +1556,7 @@ void singInsano(){
                     wcout<<"Chute uma letra: "<<endl;
                     wcin>>chute;
             
-            system("cls");
+            limparTela();
 
                 if (chuteRepetido(chute[0])){ //recebe uma resposta booleana da função chuteRepetido(), true a palavra é repetida, false é valida.
 
@@ -1586,7 +1591,7 @@ void singInsano(){
                     }
 
                     acerto = false;
-                    system("cls");
+                    limparTela();
         
                 }
 
@@ -1696,7 +1701,7 @@ void checkTime( clock_t tempo_inicial, int tempoMax){
 
 void tempoEsgotado(){
 
-    system("cls");
+    limparTela();
 
 
         wcout << "TEMPO ESGOTADO "<<endl;
@@ -1727,7 +1732,7 @@ void tempoEsgotado(){
 
             }else{
                     
-                system("cls");
+                limparTela();
 
                     wcout<<"Obrigado por jogar meu jogo v3 "<<endl;
 
@@ -1768,7 +1773,7 @@ void ganhou (){
 
             }else if( opc == 2) 
             {
-                system("cls");
+                limparTela();
                 wcout<<"Obrigado por jogar meu jogo v3 "<<endl;
 
                 exit(0); //indica que o progama se encerrou, biblioteca cstdlib
@@ -1812,7 +1817,7 @@ void perdeu (){
 
          }else{
                    
-           system("cls");
+           limparTela();
            wcout<<"Obrigado por jogar meu jogo v3 "<<endl;
 
            exit(0); //indica que o progama se encerrou, biblioteca cstdlib
@@ -1852,7 +1857,7 @@ void perdeu (){
 
             }else if( opc == 2) 
             {
-                system("cls");
+                limparTela();
                 wcout<<"Obrigado por jogar meu jogo v3 "<<endl;
 
                 exit(0); //indica que o progama se encerrou, biblioteca cstdlib
@@ -1895,7 +1900,7 @@ void singPerdeu(){
 
             }else{
                     
-                system("cls");
+                limparTela();
 
                     wcout<<"Obrigado por jogar meu jogo v3 "<<endl;
 
@@ -1909,7 +1914,7 @@ void singPerdeu(){
 }
 void singTimeout(){
     
-    system("cls");
+    limparTela();
 
 
         wcout << "TEMPO ESGOTADO "<<endl;
@@ -1941,7 +1946,7 @@ void singTimeout(){
 
             }else{
                     
-                system("cls");
+                limparTela();
 
                     wcout<<"Obrigado por jogar meu jogo v3 "<<endl;
 
