@@ -64,7 +64,7 @@ int main(){
  }
   void pausarTela(){
     cout<<"Pressione qualquer tecla para continua..."<<endl;
-    //cin.get(); //vai pausar o sistema até ter uma interação do jogador, fazendo assim a função do system("pause"), porem multi sistema, linux,windows,macOS.
+    cin.get(); //vai pausar o sistema até ter uma interação do jogador, fazendo assim a função do system("pause"), porem multi sistema, linux,windows,macOS.
   }
 
 void inicio(){
@@ -74,9 +74,9 @@ void inicio(){
     wcout<<"Isaque Rodrigues Alves\n "<<endl;
 
     wcout<<"Instragam:\n@isaquetads \n@isaque_rodriguesdev\n\n "<<endl;
-    system("pause");
-    limparTela();
     pausarTela();
+    limparTela();
+    
 
 }
 
