@@ -39,6 +39,7 @@ using namespace std;
    string escolherAleatorio();
    pair<string, string> BancodePalavras();
    void limparTela();
+   void pausarTela();
 
 
 
@@ -59,7 +60,12 @@ int main(){
     #else
         system("clear");
     #endif
+    //Função dedicada a fazer a subistituição da system("cls") e system("clear") para que assim fucnine tanto em windows quando em linux e até em macOS
  }
+  void pausarTela(){
+    cout<<"Pressione qualquer tecla para continua..."<<endl;
+    cin.get(); //vai pausar o sistema até ter uma interação do jogador, fazendo assim a função do system("pause"), porem multi sistema, linux,windows,macOS.
+  }
 
 void inicio(){
 
