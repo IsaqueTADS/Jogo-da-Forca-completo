@@ -64,11 +64,10 @@ int main(){
  }
   void pausarTela(){
     cout<<"Pressione qualquer tecla para continua..."<<endl;
-    cin.get(); //vai pausar o sistema até ter uma interação do jogador, fazendo assim a função do system("pause"), porem multi sistema, linux,windows,macOS.
+    //cin.get(); //vai pausar o sistema até ter uma interação do jogador, fazendo assim a função do system("pause"), porem multi sistema, linux,windows,macOS.
   }
 
 void inicio(){
-
     wcout<<"JOGO DA FORCA V2.0 "<<endl;
     wcout<<"===================="<<endl;
     wcout<<"Criador: IsaqueTADS"<<endl;
@@ -77,12 +76,14 @@ void inicio(){
     wcout<<"Instragam:\n@isaquetads \n@isaque_rodriguesdev\n\n "<<endl;
     system("pause");
     limparTela();
+    pausarTela();
 
 }
 
 void chamadaOne(){
 
     setlocale(LC_ALL,"portuguese");
+    limparTela();
 
     cout<<"MODO DE JOGO"<<endl;
     cout<<"[1]MultiPlayer"<<endl;
