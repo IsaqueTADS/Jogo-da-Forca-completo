@@ -1491,7 +1491,7 @@ void singInsano(){
             wcout<<"Você tem: "<<tempoMax / 60 << "m "<<tempoMax % 60<<"s "<<"para adivinhar a palavra"<<endl;
             wcout<<"O jogo começa em: "<<endl;
 
-        locale::global(old_locale); //volta para linguagem de escopo globa
+        locale::global(old_locale); //volta para linguagem de escopo global
         
         while( intime > 0 ){
 
