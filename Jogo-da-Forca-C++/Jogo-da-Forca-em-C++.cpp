@@ -74,7 +74,7 @@ void inicio(){
     wcout<<"Isaque Rodrigues Alves\n "<<endl;
 
     wcout<<"Instragam:\n@isaquetads \n@isaque_rodriguesdev\n\n "<<endl;
-    system("pause");
+    pausarTela();
     limparTela();
 
 }
