@@ -1,9 +1,11 @@
 /*
-    Essa versão do jogo foi modificada para atender as demandas da uce, o qual fizemos um trabalho de 
-    a importancia do aprendizado tecnoplogico e inicialização a informatica. Essa oficina tem como objetivo pasar conhecimento sobre tecnologia para crianças de 1a a 11 anos. Então modificamos essa versão para uma versão mais simples do meu jogo, pár podermos mostrar par eles que há uma possibilidade de criar jogos, e deixalos interessados quanto ao munto enorme da informatica.
-    Nota: versão especifica para Educação.
-    objetivo: atender a demanda do trablaho de uce
-    criador: Isaque Rodrigues Alves 
+    Esta versão do jogo foi modificada para atender às demandas da UCE, como parte do trabalho sobre "A importância do aprendizado tecnológico e a introdução à informática". A oficina tem como objetivo transmitir conhecimentos sobre tecnologia para crianças de 9 a 11 anos. Portanto, adaptamos o jogo para uma versão mais simples, permitindo que elas compreendam que é possível criar jogos e despertar seu interesse pelo vasto mundo da informática.
+
+    Nota: Versão específica para fins educacionais.
+
+    Objetivo: Atender às demandas do trabalho da UCE.
+
+    Criador: Isaque Rodrigues Alves
 
 */
 
